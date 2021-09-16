@@ -4,12 +4,9 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -43,5 +40,13 @@ public class AuthentificationController {
         }
         throw new NotAuthorizedException("User ["+loginViewModel.getUsername()+"] not known");
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsername(LoginViewModel loginViewModel){
+        return Response.ok(loginViewModel.getUsername()).build();
+    }
 }
+
+
 
